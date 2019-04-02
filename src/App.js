@@ -1,25 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-
+import images from './images';
+import Cards from './components/Cards/'
 class App extends Component {
+
+  state = {
+    score: 0,
+    images: images,
+    clicked: []
+  
+  }
+
+  clicked =(photoId) => {
+    let clicked = this.state.clicked
+    //check cilcked array if id is alraedy in the array
+    if (clicked.includes(photoId)){
+      console.log("true")
+    } else {
+      console.log("false")
+    }
+    clicked.push(photoId);
+    this.setState({clicked})
+    console.log(photoId)
+  }
+
   render() {
+    const {images, score} = this.state;
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        {images.map(photos => <Cards id={photos.id} img={photos.img} clicked={this.clicked}/> )}
       </div>
     );
   }

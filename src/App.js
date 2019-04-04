@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import './App.css';
 import images from './images';
-import Cards from './components/Cards/'
-import Nav from './components/Nav'
+import Cards from './components/Cards/';
+import Nav from './components/Nav';
 class App extends Component {
 
   state = {
@@ -26,7 +25,7 @@ class App extends Component {
 
     //rearage the array
 
-    newArray = newArray.sort(() => Math.random() - 0.5);
+    newArray = newArray.sort(() => Math.random() - 0.0);
 
     // setstate to new rearanged array
     this.setState({
@@ -38,14 +37,33 @@ class App extends Component {
     let clicked = this.state.clicked
     //check cilcked array if id is alraedy in the array
     if (clicked.includes(photoId)){
-      console.log("true")
+      alert("You lost")
+      this.setState({
+        score: 0,
+        clicked: []
+      })
+      this.shuffle();
     } else {
-      console.log("false")
+      let newscore = this.state.score;
+      newscore = newscore +1 
+      this.setState({
+        score: newscore
+      })
+      clicked.push(photoId);
+      this.setState({clicked})
       this.shuffle();
     }
-    clicked.push(photoId);
-    this.setState({clicked})
-    console.log(photoId)
+    this.checkWin();
+  }
+
+  checkWin =() =>{
+    if (this.state.length === this.state.clicked.length) {
+      alert("You Win")
+      this.setState({
+        score: 0,
+        clicked: []
+      }) 
+    }
   }
 
   render() {
@@ -53,7 +71,7 @@ class App extends Component {
     return (
       <Fragment>
         <Nav score= {score} />
-        <div className="App">
+        <div className="img-game">
           {images.map((photos, i) => <Cards id={photos.id} key={i} img={photos.img} clicked={this.clicked}/> )}
         </div>
       </Fragment>

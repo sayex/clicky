@@ -1,0 +1,10 @@
+img  {
+    object-fit: cover;
+    width:230px;
+    height:230px;
+}
+.img-game {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

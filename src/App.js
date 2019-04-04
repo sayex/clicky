@@ -1,14 +1,37 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './App.css';
 import images from './images';
 import Cards from './components/Cards/'
+import Nav from './components/Nav'
 class App extends Component {
 
   state = {
     score: 0,
-    images: images,
+    images: [],
+    length: 0,
     clicked: []
   
+  }
+
+  componentDidMount() {
+    this.setState({
+      images,
+      length: images.length
+    })
+  }
+
+  shuffle = () =>{
+    //grab the iamge array from state
+    let newArray = this.state.images;
+
+    //rearage the array
+
+    newArray = newArray.sort(() => Math.random() - 0.5);
+
+    // setstate to new rearanged array
+    this.setState({
+      iamges: newArray
+    })
   }
 
   clicked =(photoId) => {
@@ -18,6 +41,7 @@ class App extends Component {
       console.log("true")
     } else {
       console.log("false")
+      this.shuffle();
     }
     clicked.push(photoId);
     this.setState({clicked})
@@ -27,9 +51,12 @@ class App extends Component {
   render() {
     const {images, score} = this.state;
     return (
-      <div className="App">
-        {images.map(photos => <Cards id={photos.id} img={photos.img} clicked={this.clicked}/> )}
-      </div>
+      <Fragment>
+        <Nav score= {score} />
+        <div className="App">
+          {images.map((photos, i) => <Cards id={photos.id} key={i} img={photos.img} clicked={this.clicked}/> )}
+        </div>
+      </Fragment>
     );
   }
 }

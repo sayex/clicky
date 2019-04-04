@@ -6,7 +6,7 @@ const Cards = (props) => {
         <div>
          <img onClick={() => {
           props.clicked (props.id)
-        }} key={props.id} src={props.img} alt="test"/> 
+        }} src={props.img} alt="test"/> 
         </div>
     )
 }

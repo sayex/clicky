@@ -25,7 +25,7 @@ class App extends Component {
 
     //rearage the array
 
-    newArray = newArray.sort(() => Math.random() - 0.0);
+    newArray = newArray.sort(() => Math.random() - 0.5);
 
     // setstate to new rearanged array
     this.setState({
